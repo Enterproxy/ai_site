@@ -19,4 +19,6 @@ model Document {
   keywords  Json?    @default("[]")
   content   String?
   fileUrl   String?
+  thumbnailUrl String?
+  createdAt    DateTime  @default(now())
 }

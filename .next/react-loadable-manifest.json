@@ -1,23 +1,14 @@
 {
   "components\\DocumentCard.tsx -> ./PdfPreview": {
-    "id": 2533,
+    "id": "components\\DocumentCard.tsx -> ./PdfPreview",
     "files": [
-      "static/chunks/685f7497.b67242a9d01e604e.js",
-      "static/chunks/72f8daf4.45c628463479f88b.js",
-      "static/chunks/255.1fc79530b365ad2c.js",
-      "static/chunks/533.5f126e678f45808e.js"
+      "static/chunks/_app-pages-browser_components_PdfPreview_tsx.js"
     ]
   },
-  "node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
-    "id": 472,
+  "node_modules\\next\\dist\\client\\components\\react-dev-overlay\\utils\\use-websocket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts": {
+    "id": "node_modules\\next\\dist\\client\\components\\react-dev-overlay\\utils\\use-websocket.js -> @vercel/turbopack-ecmascript-runtime/browser/dev/hmr-client/hmr-client.ts",
     "files": [
-      "static/chunks/472.a3826d29d6854395.js"
-    ]
-  },
-  "node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
-    "id": 9341,
-    "files": [
-      "static/chunks/341.056900400c7cb71c.js"
+      "static/chunks/_app-pages-browser_node_modules_next_dist_client_dev_noop-turbopack-hmr_js.js"
     ]
   }
 }

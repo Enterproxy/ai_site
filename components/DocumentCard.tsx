@@ -34,19 +34,15 @@ export function DocumentCard({ document }: DocumentCardProps) {
         </p>
 
         {/* podgląd PDF wyśrodkowany */}
-        {fileUrl && (
-          <div className="flex justify-center">
-            <object
-              data={`${fileUrl}#page=1&view=FitH`}
-              type="application/pdf"
-              width="200"
-              height="260"
-              className="border rounded mx-auto"
-            >
-              <p>Podgląd PDF niedostępny</p>
-            </object>
-          </div>
-        )}
+		{document.thumbnailUrl && (
+		  <div className="flex justify-center">
+			<img
+			  src={document.thumbnailUrl}
+			  alt={`Podgląd dokumentu ${title}`}
+			  className="w-[200px] h-[260px] object-cover border rounded"
+			/>
+		  </div>
+		)}
 
         {/* tagi i słowa kluczowe */}
         <div className="flex flex-wrap gap-2 mt-2">

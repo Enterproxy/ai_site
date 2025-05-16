@@ -184,6 +184,10 @@ export async function uploadDocument(
   formData.append('tags', JSON.stringify(metadata.tags||[]))
   formData.append('keywords', JSON.stringify(metadata.keywords||[]))
   formData.append('content', metadata.content||'')
+  
+  if (metadata.thumbnail) {
+	formData.append('thumbnail', metadata.thumbnail)
+  }
 
   const res = await fetch('/api/documents', { method: 'POST', body: formData })
   const text = await res.text()

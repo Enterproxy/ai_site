@@ -1,7 +1,7 @@
-// pages/api/documents/[id].ts
-
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../lib/prisma'
+import fs from 'fs-extra'
+import path from 'path'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query
@@ -25,7 +25,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === 'DELETE') {
     try {
+      // 1. Pobierz dokument z bazy
+      const doc = await prisma.document.findUnique({ where: { id: String(id) } })
+      if (!doc) return res.status(404).json({ error: 'Document not found' })
+
+      // 2. Usuń pliki z dysku
+      const filePath = path.join(process.cwd(), 'public', doc.fileUrl)
+      const thumbPath = path.join(process.cwd(), 'public', doc.thumbnailUrl)
+
+      await Promise.allSettled([
+        fs.remove(filePath),
+        fs.remove(thumbPath)
+      ])
+
+      // 3. Usuń dokument z bazy
       await prisma.document.delete({ where: { id: String(id) } })
+
       return res.status(204).end()
     } catch (e) {
       console.error('DELETE /api/documents/[id] error', e)
