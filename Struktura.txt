@@ -1,0 +1,47 @@
+ibw-frontend/
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── api/
+│   │   └── documents/
+│   │       └── [id]/
+│   │           └── route.ts
+│   ├── edit/
+│   │   └── [id]/
+│   │       └── page.tsx
+│   ├── explore/
+│   │   └── page.tsx
+│   ├── document/
+│   │   └── [id]/
+│   │       └── page.tsx
+│   ├── chat/
+│   │   └── page.tsx
+│   └── upload/
+│       └── page.tsx
+├── components/
+│   ├── DocumentCard.tsx
+│   ├── FilterPanel.tsx
+│   ├── SearchBar.tsx
+│   ├── Sidebar.tsx
+│   ├── Topbar.tsx
+│   ├── ChatWindow.tsx
+│   ├── ChatMessage.tsx
+│   └── UploadForm.tsx
+├── lib/
+│   ├── api.ts
+│   └── utils.ts
+├── pages/
+│   └── api/
+│   	└── documents/
+│           ├── [id].ts
+│           └── index.ts
+├── store/
+│   └── filters.ts
+├── styles/
+│   └── globals.css
+├── public/
+│   └── logo.svg
+├── tailwind.config.ts
+├── postcss.config.js
+├── tsconfig.json
+└── package.json

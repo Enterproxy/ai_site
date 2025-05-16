@@ -1,0 +1,22 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Document {
+  id        String   @id @default(uuid())
+  title     String
+  author    String?
+  date      DateTime?
+  language  String?
+  tags      Json?    @default("[]")
+  keywords  Json?    @default("[]")
+  content   String?
+  fileUrl   String?
+}
