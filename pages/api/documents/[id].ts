@@ -30,13 +30,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!doc) return res.status(404).json({ error: 'Document not found' })
 
       // 2. Usuń pliki z dysku
-      const filePath = path.join(process.cwd(), 'public', doc.fileUrl)
-      const thumbPath = path.join(process.cwd(), 'public', doc.thumbnailUrl)
+		const filePath = path.join(process.cwd(), 'public', doc.fileUrl)
+		const removeTasks = [fs.remove(filePath)]
 
-      await Promise.allSettled([
-        fs.remove(filePath),
-        fs.remove(thumbPath)
-      ])
+		if (doc.thumbnailUrl) {
+		  const thumbPath = path.join(process.cwd(), 'public', doc.thumbnailUrl)
+		  removeTasks.push(fs.remove(thumbPath))
+		}
+
+		await Promise.allSettled(removeTasks)
 
       // 3. Usuń dokument z bazy
       await prisma.document.delete({ where: { id: String(id) } })
