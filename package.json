@@ -2,7 +2,6 @@
   "name": "document-management-system",
   "version": "1.0.0",
   "description": "System do zarządzania dokumentami z wykorzystaniem AI i semantycznego wyszukiwania",
-  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -12,7 +11,7 @@
     "format": "prettier --write ."
   },
   "prisma": {
-	"seed": "ts-node -P tsconfig.seed.json prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
