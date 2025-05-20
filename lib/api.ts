@@ -1,5 +1,7 @@
 const LOCAL_STORAGE_KEY = 'uploadedDocs'
 
+import { baseDocuments } from '../premade_db/baseDocuments'
+
 export interface Document {
   id: string
   title: string
@@ -47,71 +49,6 @@ export async function saveEditedDocument(id: string, data: Partial<Document>): P
 
   return res.json()
 }
-
-
-
-export const baseDocuments: Document[] = [
-  {
-    id: 'fallback-1',
-    title: 'Prezentacja Ewolucja Różnicowa',
-    author: 'Bartek R',
-    date: '2023-05-01',
-    language: 'polski',
-    tags: ['ewolucja różnicowa', 'algorytm genetyczny'],
-    keywords: ['ai', 'prezentacja'],
-    content: '',
-    fileUrl: '/uploads/ts426kk7pm8dwg68gnlhc0klm.pdf',
-    thumbnailUrl: '/thumbnails/cjfgyy30hcv580fczfvq84xl4.png',
-  },
-  {
-    id: 'fallback-2',
-    title: 'Broszura Fiat Tipo',
-    author: 'Fiat',
-    date: '2022-11-15',
-    language: 'angielski',
-    tags: ['fiat', 'samochód'],
-    keywords: ['broszura'],
-    content: '',
-    fileUrl: '/uploads/drgu12wy7lwclya0ano8c5tgly.pdf',
-    thumbnailUrl: '/thumbnails/kenidayr2tjik17ivpcojp63x.png',
-  },
-  {
-    id: 'fallback-3',
-    title: 'Broszura Hyundai i30',
-    author: 'Hyundai',
-    date: '2024-02-10',
-    language: 'angielski',
-    tags: ['samochód', 'hyundai', 'i30'],
-    keywords: ['broszura'],
-    content: '',
-    fileUrl: '/uploads/o0ffhapl3f06x2h5b4k0hg51b.pdf',
-    thumbnailUrl: '/thumbnails/fe5n1mb17k8t31r3apiw1vw0t.png',
-  },
-  {
-    id: 'fallback-4',
-    title: 'Dokument urzędowy',
-    author: 'Urząd skarbowy',
-    date: '2024-02-10',
-    language: 'polski',
-    tags: ['dokument'],
-    keywords: ['podatki', 'opłaty'],
-    content: '',
-    fileUrl: '/uploads/qongt15vnxl8con0qhrkbqlob.pdf',
-    thumbnailUrl: '/thumbnails/cukuk497ajdntty91thqxkdn5.png',
-  },
-  {
-    id: 'fallback-5',
-    title: 'Instrukcja Radio Blaupunkt',
-    author: 'Balupunkt',
-    date: '2024-02-10',
-    language: 'wielojęzyczny',
-    tags: ['instrukcja', 'blaupunkt'],
-    keywords: ['radio'],
-    content: '',
-    fileUrl: '/uploads/y1bjhspbabmv85yxsgzwa8819.pdf',
-    thumbnailUrl: '/thumbnails/oay2t86j2hw15eiff5xeqhkos.png',
-  }
-]
 
 export async function fetchDocuments(filters?: any, query?: string): Promise<Document[]> {
   const res = await fetch('/api/documents')
