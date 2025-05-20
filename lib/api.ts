@@ -124,15 +124,25 @@ export async function fetchDocuments(filters?: any, query?: string): Promise<Doc
       errMsg = json.error || JSON.stringify(json)
     } catch {}
     console.error('Błąd pobierania dokumentów:', res.status, errMsg)
-    return []
+    return baseDocuments // fallback w przypadku błędu
   }
 
-  const all: Document[] = JSON.parse(text)
+  let all: Document[] = []
+  try {
+    all = JSON.parse(text)
+  } catch (e) {
+    console.error('Błąd parsowania JSON:', e)
+    return baseDocuments
+  }
 
+  if (all.length === 0) {
+    return baseDocuments
+  }
+
+  // filtrowanie
   return all.filter((doc) => {
     const matchesQuery =
-      !query ||
-      doc.title.toLowerCase().includes(query.toLowerCase())
+      !query || doc.title.toLowerCase().includes(query.toLowerCase())
 
     const matchesAuthor =
       !filters?.author ||
@@ -140,9 +150,7 @@ export async function fetchDocuments(filters?: any, query?: string): Promise<Doc
 
     const matchesLanguage =
       !filters?.language ||
-      doc.language
-        ?.toLowerCase()
-        .includes(filters.language.toLowerCase())
+      doc.language?.toLowerCase().includes(filters.language.toLowerCase())
 
     const tagFilter = (filters?.tags || []).filter((t: string) => t)
     const matchesTags =
@@ -151,12 +159,9 @@ export async function fetchDocuments(filters?: any, query?: string): Promise<Doc
 
     const docDate = new Date(doc.date || '')
     const matchesDateFrom =
-      !filters?.dateFrom ||
-      docDate >= new Date(filters.dateFrom)
-
+      !filters?.dateFrom || docDate >= new Date(filters.dateFrom)
     const matchesDateTo =
-      !filters?.dateTo ||
-      docDate <= new Date(filters.dateTo)
+      !filters?.dateTo || docDate <= new Date(filters.dateTo)
 
     return (
       matchesQuery &&
