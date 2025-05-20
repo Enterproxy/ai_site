@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { fetchDocument, deleteDocument } from '@lib/api'
+import { baseDocuments } from '../../../premade_db/baseDocuments'
 import { Badge } from '@components/ui/badge'
 
 export default function DocumentDetailPage() {
@@ -18,7 +19,18 @@ export default function DocumentDetailPage() {
     if (!id) return
     ;(async () => {
       setLoading(true)
-      const data = await fetchDocument(id as string)
+
+      // Spróbuj pobrać dokument z API
+      let data = await fetchDocument(id as string)
+
+      // Jeśli nie znaleziono, spróbuj znaleźć w baseDocuments
+      if (!data) {
+        const fallback = baseDocuments.find((d) => d.id === id)
+        if (fallback) {
+          data = fallback
+        }
+      }
+
       setDoc(data)
       setLoading(false)
     })()
