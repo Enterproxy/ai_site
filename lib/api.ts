@@ -113,8 +113,11 @@ export async function fetchDocuments(filters?: any, query?: string): Promise<Doc
 
 export async function fetchDocument(id: string): Promise<Document | null> {
   const res = await fetch(`/api/documents/${id}`)
-  if (!res.ok) return null
-  return res.json()
+  if (res.ok) return res.json()
+
+  // fallback jeśli dokumentu nie ma w bazie
+  const fallbackDoc = baseDocuments.find(doc => doc.id === id)
+  return fallbackDoc || null
 }
 
 export async function askChat(prompt: string): Promise<string> {
